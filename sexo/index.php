@@ -15,6 +15,10 @@ if (isset($_POST['salvar']) && $_POST['salvar'] == 'salvar') {
 if (isset($_POST['editar']) && $_POST['editar'] == 'editar') {
     $sexo = $dao->findById($_POST['id']);
 }
+if (isset($_POST['remover']) && $_POST['remover'] == 'remover') {
+    $dao->remove($_POST['id']);
+    header('location: index.php');
+}
 $sexos = $dao->findAll();
 ?>
 <!DOCTYPE html>
@@ -24,6 +28,7 @@ $sexos = $dao->findAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sexos</title>
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/css/all.css">
 </head>
 <body>
     <div class="container">
@@ -42,7 +47,9 @@ $sexos = $dao->findAll();
                             <input type="text" class="form-control" name="sigla" id="sigla" maxlength="1" required value="<?=$sexo->getSigla();?>">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block" name="salvar" value="salvar">Salvar</button>
+                            <button type="submit" class="btn btn-primary btn-block" name="salvar" value="salvar">
+                                <i class="fas fa-save"></i> Salvar
+                            </button>
                         </div>
                     </form>
                 </fieldset>
@@ -68,11 +75,14 @@ $sexos = $dao->findAll();
                                     <td>
                                         <form action="index.php" method="post">
                                             <input type="hidden" name="id" value="<?=$sexo->getId();?>">
-                                            <button type="submit" class="btn btn-sm btn-success" name="editar" value="editar">editar</button>
+                                            <button type="submit" class="btn btn-sm btn-success" name="editar" value="editar"><i class="fas fa-edit"></i></button>
                                         </form>
                                     </td>
                                     <td>
-                                        <button type="submit" class="btn btn-sm btn-danger" name="remover" value="remover">remover</button>
+                                        <form action="index.php" method="post">
+                                            <input type="hidden" name="id" value="<?=$sexo->getId();?>">
+                                            <button type="submit" class="btn btn-sm btn-danger" name="remover" value="remover"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
