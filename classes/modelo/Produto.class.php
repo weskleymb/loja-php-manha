@@ -28,7 +28,7 @@ class Produto {
     }
 
     public function setNome($nome) {
-        $this->nome = $nome;
+        $this->nome = strtoupper($nome);
     }
 
     public function setPreco($preco) {
@@ -38,7 +38,5 @@ class Produto {
     public function setMarca(Marca $marca) {
         $this->marca = $marca;
     }
-
-    
 
 }
