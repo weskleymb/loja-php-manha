@@ -4,9 +4,17 @@ require_once(__DIR__ . "/../classes/dao/MarcaDAO.class.php");
 require_once(__DIR__ . "/../classes/modelo/Produto.class.php");
 require_once(__DIR__ . "/../classes/dao/ProdutoDAO.class.php");
 
+$home = "/loja/produto/";
 $produto = new Produto();
 $marcaDao = new MarcaDAO();
 $produtoDao = new ProdutoDAO();
+if (isset($_POST['editar']) && $_POST['editar'] == 'editar') {
+    $produto = $produtoDao->findById($_POST['id']);
+}
+if (isset($_POST['remover']) && $_POST['remover'] == 'remover') {
+    $produtoDao->remove($_POST['id']);
+    header("location: $home");
+}
 if (isset($_POST['salvar']) && $_POST['salvar'] == 'salvar') {
     $produto->setNome($_POST['produto']);
     $produto->setPreco($_POST['preco']);
@@ -18,14 +26,7 @@ if (isset($_POST['salvar']) && $_POST['salvar'] == 'salvar') {
         $produto->setId($_POST['id']);
     }
     $produtoDao->save($produto);
-    header('location: index.php');
-}
-if (isset($_POST['editar']) && $_POST['editar'] == 'editar') {
-    $produto = $produtoDao->findById($_POST['id']);
-}
-if (isset($_POST['remover']) && $_POST['remover'] == 'remover') {
-    $produtoDao->remove($_POST['id']);
-    header('location: index.php');
+    header("location: $home");
 }
 $marcas = $marcaDao->findAll();
 $produtos = $produtoDao->findAll();
@@ -45,7 +46,7 @@ $produtos = $produtoDao->findAll();
             <div class="col-6"><!-- Formulario -->
                 <fieldset>
                     <legend>Dados do Produto</legend>
-                    <form method="post">
+                    <form method="post" id="form">
                         <input type="hidden" name="id" value="<?=$produto->getId();?>">
                         <div class="form-group"><!-- input produto -->
                             <label for="produto">produto</label>
@@ -56,15 +57,7 @@ $produtos = $produtoDao->findAll();
                             <select class="form-control" name="marca" id="marca">
                                 <option value="0" disabled selected>--SELECIONE--</option>
                                 <?php foreach($marcas as $marca): ?>
-                                    <?php
-                                        $selected = "";
-                                        if ($marca->getId() == $produto->getMarca()->getId()) {
-                                            $selected = "selected";
-                                        }
-                                    ?>
-                                    <option value="<?=$marca->getId();?>" <?=$selected;?>>
-                                        <?=$marca->getNome();?>
-                                    </option>
+                                    <option value="<?=$marca->getId();?>" <?=$marca->getId() == $produto->getMarca()->getId() ? "selected": "";?>><?=$marca->getNome();?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -120,5 +113,6 @@ $produtos = $produtoDao->findAll();
             </div>
         </div>
     </div> 
+    <script src="../assets/js/produto.js"></script>
 </body>
 </html>
