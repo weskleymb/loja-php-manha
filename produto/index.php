@@ -46,7 +46,7 @@ $produtos = $produtoDao->findAll();
             <div class="col-6"><!-- Formulario -->
                 <fieldset>
                     <legend>Dados do Produto</legend>
-                    <form method="post" id="form">
+                    <form method="post" id="form_salvar">
                         <input type="hidden" name="id" value="<?=$produto->getId();?>">
                         <div class="form-group"><!-- input produto -->
                             <label for="produto">produto</label>
@@ -66,7 +66,7 @@ $produtos = $produtoDao->findAll();
                             <input type="text" class="form-control" name="preco" id="preco" value="<?=$produto->getPreco();?>">
                         </div>
                         <div class="form-group"><!-- button salvar -->
-                            <button type="submit" class="btn btn-primary btn-block" name="salvar" value="salvar">
+                            <button type="submit" class="btn btn-primary btn-block" name="salvar" value="salvar" onclick="return confirmaSalvar();">
                                 <i class="fas fa-save"></i> Salvar
                             </button>
                         </div>
@@ -94,15 +94,15 @@ $produtos = $produtoDao->findAll();
                                     <td><?=$produto->getMarca()->getNome();?></td>
                                     <td><?=$produto->getPrecoFormatado();?></td>
                                     <td>
-                                        <form method="post">
+                                        <form method="post" id="form_editar">
                                             <input type="hidden" name="id" value="<?=$produto->getId();?>">
                                             <button type="submit" class="btn btn-sm btn-success" name="editar" value="editar"><i class="fas fa-edit"></i></button>
                                         </form>
                                     </td>
                                     <td>
-                                        <form method="post">
+                                        <form method="post" id="form_remover">
                                             <input type="hidden" name="id" value="<?=$produto->getId();?>">
-                                            <button type="submit" class="btn btn-sm btn-danger" name="remover" value="remover"><i class="fas fa-trash-alt"></i></button>
+                                            <button type="submit" class="btn btn-sm btn-danger" name="remover" value="remover" onclick="return confirmaRemover();"><i class="fas fa-trash-alt"></i></button>
                                         </form>
                                     </td>
                                 </tr>

@@ -1,4 +1,7 @@
-var listener = document.getElementById('form');
-listener.addEventListener('submit', function() {
-    return confirm('Deseja Salvar?');
-}, false);
+function confirmaSalvar() {
+    return confirm("Deseja SALVAR?");
+}
+
+function confirmaRemover() {
+    return confirm("Deseja REMOVER?");
+}
