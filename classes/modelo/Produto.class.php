@@ -1,11 +1,17 @@
 <?php
 
+require_once(__DIR__ . "/./Marca.class.php");
+
 class Produto {
 
     private $id;
     private $nome;
     private $preco;
     private $marca;
+
+    public function __construct() {
+        $this->marca = new Marca();
+    }
 
     public function getId() {
         return $this->id;
