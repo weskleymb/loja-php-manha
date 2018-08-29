@@ -15,7 +15,6 @@ class ProdutoDAO {
     private function insert(Produto $produto) {
         $sql = "INSERT INTO tb_produtos (pro_nome, pro_preco, pro_mar_id) VALUES (:nome, :preco, :marca)";
         try {
-            $statement = $this->conexao->prepare($sql);
             $nome = $produto->getNome();
             $preco = $produto->getPreco();
             $marca = $produto->getMarca()->getId();
@@ -34,12 +33,15 @@ class ProdutoDAO {
     private function update(Produto $produto) {
         $sql = "UPDATE tb_produtos SET pro_nome=:nome, pro_preco=:preco, pro_mar_id=:marca WHERE pro_id=:id";
         try {
-            $conexao = Conexao::get();
-            $statement = Conexao::get()->prepare($sql);
-            $statement->bindParam(':nome', $produto->getNome());
-            $statement->bindParam(':preco', $produto->getPreco());
-            $statement->bindParam(':marca', $produto->getMarca()->getId());
-            $statement->bindParam(':id', $produto->getId());
+            $nome = $produto->getNome();
+            $preco = $produto->getPreco();
+            $marca = $produto->getMarca()->getId();
+            $id = $produto->getId();
+            $statement = $this->conexao->prepare($sql);
+            $statement->bindParam(':nome', $nome);
+            $statement->bindParam(':preco', $preco);
+            $statement->bindParam(':marca', $marca);
+            $statement->bindParam(':id', $id);
             $statement->execute();
             return $this->findById($produto->getId());
         } catch(PDOException $e) {
@@ -59,7 +61,7 @@ class ProdutoDAO {
     public function remove($id) {
         $sql = "DELETE FROM tb_produtos WHERE pro_id=:id";
         try {
-            $statement = Conexao::get()->prepare($sql);
+            $statement = $this->conexao->prepare($sql);
             $statement->bindParam(':id', $id);
             $statement->execute();
         } catch(PDOException $e) {
@@ -69,7 +71,7 @@ class ProdutoDAO {
 
     public function findAll() {
         $sql = "SELECT * FROM tb_produtos LEFT JOIN tb_marcas ON mar_id=pro_mar_id";
-        $statement = Conexao::get()->prepare($sql);
+        $statement = $this->conexao->prepare($sql);
         $statement->execute();
         $rows = $statement->fetchAll();
         $produtos = array();
@@ -89,7 +91,7 @@ class ProdutoDAO {
 
     public function findById(int $id) {
         $sql = "SELECT * FROM tb_produtos LEFT JOIN tb_marcas ON mar_id=pro_mar_id WHERE pro_id=:id";
-        $statement = Conexao::get()->prepare($sql);
+        $statement = $this->conexao->prepare($sql);
         $statement->bindParam(':id', $id);
         $statement->execute();
         $row = $statement->fetch();
