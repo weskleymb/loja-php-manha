@@ -83,7 +83,7 @@ $produtos = $produtoDao->findAll();
                                 <th>produto</th>
                                 <th>marca</th>
                                 <th>preço</th>
-                                <th>ações</th>                        
+                                <th colspan="2">ações</th>                        
                             </tr>
                         </thead>
                         <tbody>
@@ -92,7 +92,7 @@ $produtos = $produtoDao->findAll();
                                     <td><?=$produto->getId();?></td>
                                     <td><?=$produto->getNome();?></td>
                                     <td><?=$produto->getMarca()->getNome();?></td>
-                                    <td><?=$produto->getPreco();?></td>
+                                    <td><?=$produto->getPrecoFormatado();?></td>
                                     <td>
                                         <form method="post">
                                             <input type="hidden" name="id" value="<?=$produto->getId();?>">

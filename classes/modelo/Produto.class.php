@@ -25,6 +25,10 @@ class Produto {
         return $this->preco;
     }
 
+    public function getPrecoFormatado() {
+        return 'R$ ' . number_format($this->preco, 2, ',', '.');
+    }
+
     public function getMarca() {
         return $this->marca;
     }
