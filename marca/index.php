@@ -19,6 +19,7 @@ if (isset($_POST['remover']) && $_POST['remover'] == 'remover') {
     header('location: index.php');
 }
 $marcas = $dao->findAll();
+$active = "marca";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -31,6 +32,7 @@ $marcas = $dao->findAll();
 </head>
 <body>
     <div class="container">
+        <?php include(__DIR__ . "/../menu.php"); ?>
         <div class="row" style="margin-top: 50px;">
             <div class="col-6"><!-- form -->
                 <fieldset>

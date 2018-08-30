@@ -32,6 +32,7 @@ if (isset($_POST['salvar']) && $_POST['salvar'] == 'salvar') {
 }
 $marcas = $marcaDao->findAll();
 $produtos = $produtoDao->findAll();
+$active = "produto";
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -44,6 +45,7 @@ $produtos = $produtoDao->findAll();
 </head>
 <body>
     <div class="container">
+        <?php include(__DIR__ . "/../menu.php"); ?>
         <div class="row" style="margin-top: 50px;">
             <div class="col-6"><!-- Formulario -->
                 <fieldset>
