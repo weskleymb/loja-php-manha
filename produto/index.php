@@ -4,6 +4,8 @@ require_once(__DIR__ . "/../classes/dao/MarcaDAO.class.php");
 require_once(__DIR__ . "/../classes/modelo/Produto.class.php");
 require_once(__DIR__ . "/../classes/dao/ProdutoDAO.class.php");
 
+include(__DIR__ . "/../logado.php");
+
 $home = "/loja/produto/";
 $produto = new Produto();
 $marcaDao = new MarcaDAO();
