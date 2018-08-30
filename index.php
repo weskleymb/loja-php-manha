@@ -1,5 +1,7 @@
 <?php
-session_start();
+
+include(__DIR__ . "/./deslogado.php");
+
 $mensagem = "";
 if (isset($_SESSION['mensagem'])) {
     $mensagem = $_SESSION['mensagem'];
@@ -24,7 +26,7 @@ if (isset($_SESSION['mensagem'])) {
             <div class="col-12">
                 <fieldset>
                     <legend>Login na Loja</legend>
-                    <form action="valida.php" method="post">
+                    <form action="login.php" method="post">
                         <div class="form-group">
                             <label for="login">Login</label>
                             <input type="text" class="form-control" name="login" id="login">
