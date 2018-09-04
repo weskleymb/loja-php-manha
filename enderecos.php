@@ -30,7 +30,7 @@ $ufs = $dao->findAll();
                 </div>
                 <div class="col-12 form-group" id="div_cidade"><!-- select cidade -->
                     <label for="cidade">Cidade</label>
-                    <select class="form-control" name="cidade" id="cidade">
+                    <select class="form-control" name="cidade" id="cidade" onchange="show_bairros(this.value);">
                         <option value="0" selected disabled>--SELECIONE--</option>
                     </select>
                 </div>

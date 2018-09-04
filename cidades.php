@@ -19,7 +19,7 @@ $cidades = $dao->findByUnidadeFederativa($uf);
     </head>
     <body>
         <label for="cidade">Cidade</label>
-        <select class="form-control" name="cidade" id="cidade">
+        <select class="form-control" name="cidade" id="cidade" onchange="show_bairros(this.value);">
             <option value="0" selected disabled>--SELECIONE--</option>
             <?php foreach($cidades as $cidade): ?>
                 <option value="<?=$cidade->getId();?>">
