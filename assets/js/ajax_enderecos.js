@@ -5,8 +5,7 @@ function show_cidades(uf_id) {
     } else {
         let http_request = new XMLHttpRequest();
         http_request.onreadystatechange = function() {
-            if (http_request.readyState == 4 && 
-                http_request.status == 200) {
+            if (http_request.readyState == 4 && http_request.status == 200) {
                 let http_response = http_request.responseText;
                 document.getElementById('div_cidade').innerHTML = http_response;
             }
