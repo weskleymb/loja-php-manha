@@ -33,7 +33,7 @@ class CidadeDAO {
     }
 
     public function findById($id) {
-        $sql = "SELECT * FROM tb_ufs WHERE uf_id=:id";
+        $sql = "SELECT * FROM tb_cidades LEFT JOIN tb_ufs ON uf_id=cid_uf_id WHERE cid_id=:id";
         $statement = $this->conexao->prepare($sql);
         $statement->bindParam(':id', $id);
         $statement->execute();
@@ -42,7 +42,11 @@ class CidadeDAO {
         $uf->setId($row['uf_id']);
         $uf->setNome($row['uf_nome']);
         $uf->setSigla($row['uf_sigla']);
-        return $uf;
+        $cidade = new Cidade();
+        $cidade->setId($row['cid_id']);
+        $cidade->setNome($row['cid_nome']);
+        $cidade->setUnidadeFederativa($uf);
+        return $cidade;
     }
 
     public function findByUnidadeFederativa(UnidadeFederativa $uf) {
